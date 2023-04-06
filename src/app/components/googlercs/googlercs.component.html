@@ -1,0 +1,362 @@
+<div class="container-fluid h-100">
+
+    <div class="row">
+        <div class="col-sm-3">
+            <app-navigation></app-navigation>
+        </div>
+        <div class="col-sm-4 mx-auto">
+
+            <br><br>
+            <h5 class="text-center">GOOGLE RCS</h5>
+
+            <div class="text-center">
+
+                <div class="card bg-light text-dark">
+                    <div class="card-body">
+                        <div class="form-check-inline">
+                            <label class="form-check-label cursorpnt">
+                                <input type="radio" [(ngModel)]="options" class="form-check-input classrad"
+                                    id="RICHCARDCNT" name="options" [value]="true" [checked]="options">RICH CARD
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label cursorpnt">
+                                <input type="radio" [(ngModel)]="options" class="form-check-input classrad"
+                                    id="CAROUSELCNT" name="options" [value]="false" [checked]="!options">CAROUSEL
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="divotrss" id="RICHCARD" *ngIf="options">
+                <h4 class="text-center">RICH CARD</h4>
+
+                <form [formGroup]="richCard" (ngSubmit)="onSubmitRichCard()">
+                    <div class="card bg-light text-dark">
+                        <div class="card-body">
+                            <select class="form-control" name="clientnameRich" id="clientnameRich">
+                                <option value="">Please select client name</option>
+                                <option value="Fonada RCS">Fonada RCS</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+
+
+                    <div class="card bg-light text-dark">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <div class="input-group custom-file-button">
+                                    <input type="file" class="form-control" id="inputGroupFile"
+                                        (change)="richCard.get('file').setValue($event.target['files'][0])">
+                                    <label class="input-group-text" for="inputGroupFile">Browse</label>
+                                </div>
+
+                                <span class="description">Recommended: Please upload the file below 150KB</span>
+                                <br>
+                                <span class="description">Supported format: 16:9 Ex: 1440px (Width) X 720px
+                                    (Height)</span>
+
+                            </div>
+                            <div class="form-group">
+
+                                <input type="text" formControlName="titleRich" class="form-control" placeholder="Title"
+                                    name="TitleRich" id="TitleRich" autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <h6 class="text-center">Message Content</h6>
+                                <textarea formControlName="messageContentRich" class="form-control" rows="3"
+                                    name="MessageContentRich" id="MessageContentRich"></textarea>
+
+                            </div>
+                            <div class="form-group">
+
+                                <input type="text" formControlName="actionButton1TitleRich" class="form-control"
+                                    placeholder="Action Button 1 Title" name="ActionButton1TitleRich"
+                                    id="ActionButton1TitleRich" autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+
+                                <input type="text" formControlName="actionButton1URLRich" class="form-control"
+                                    placeholder="Action Button 1 URL" name="ActionButton1URLRich"
+                                    id="ActionButton1URLRich" autocomplete="off">
+                            </div>
+
+                        </div>
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <button type="submit" id="smbtbtnRich" class="btn btn-success" data-toggle="modal"
+                            data-target="#exampleModal">Upload</button>
+                    </div>
+                </form>
+
+            </div>
+            <div class="divotrss" id="CAROUSEL" *ngIf="!options">
+                <h4 class="text-center">CAROUSEL</h4>
+
+
+                <form [formGroup]="loanProductForm" (ngSubmit)="onSubmit()">
+                    <div class="card bg-light text-dark">
+                        <div class="card-body">
+
+                            <select class="form-control" name="clientnameCaro" id="clientnameCaro">
+
+                                <option value="">Please select client name</option>
+                                <option value="Fonada RCS">Fonada RCS</option>
+
+                            </select>
+
+
+                        </div>
+                    </div>
+                    <br>
+
+
+                    <!-- <div class="card bg-light text-dark">
+                            <div class="card-body">
+                                <h4 class="text-center">Slide 1</h4>
+                                <div class="form-group">
+                                    <div class="input-group custom-file-button">
+                                        <input type="file" class="form-control" id="inputGroupFile"
+                                            (change)="carouselForm.get('file').setValue($event.target['files'][0])">
+                                        <label class="input-group-text" for="inputGroupFile">Browse</label>
+                                    </div>
+
+                                    <span class="description">Recommended: Please upload the file below 150KB</span>
+                                    <br><span class="description">Supported format: 4:3 Ex: 1024px (Width) X 768px
+                                        (Height)</span>
+
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" formControlName="titleCaro" class="form-control" placeholder="Title" name="TitleCaro"
+                                        id="TitleCaro" autocomplete="off">
+                                </div>
+
+                                <div class="form-group">
+                                    <h6 class="text-center">Message Content</h6>
+                                    <textarea formControlName="messageContentCaro" class="form-control" rows="3" name="MessageContentCaro"
+                                        id="MessageContentCaro"></textarea>
+
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" formControlName="actionButton1TitleCaro" class="form-control" placeholder="Action Button 1 Title"
+                                        name="ActionButton1TitleCaro" id="ActionButton1TitleCaro" autocomplete="off">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text"  formControlName="actionButton1URLCaro" class="form-control" placeholder="Action Button 1 URL"
+                                        name="ActionButton1URLCaro" id="ActionButton1URLCaro" autocomplete="off">
+                                </div>
+                                <div class="text-center">
+                                    <a class="btn btn-success btn-sm" (click)="addElement()">MORE SLIDES +</a>
+                                </div>
+                            </div>
+                        </div> -->
+                    <br>
+
+                    <div formArrayName="vitals">
+                        <div class="card bg-light text-dark spaceBottom" [formGroupName]="i"
+                            *ngFor="let product of loanProductForm.get('vitals')['controls']; let i = index; let last = last">
+                            <div class="card-body">
+                                <h4 class="text-center">Slide {{i+1}}</h4>
+                                <div class="form-group">
+                                    <div class="input-group custom-file-button">
+                                        <input formControlName="file" type="file" class="form-control" id="file"
+                                            (change)="carouselForm.get('file').setValue($event.target['files'][0])">
+                                        <label class="input-group-text" for="inputGroupFile">Browse</label>
+                                    </div>
+                                    <span class="description">Recommended: Please upload the file below 150KB</span>
+                                    <br><span class="description">Supported format: 4:3 Ex: 1024px (Width) X 768px
+                                        (Height)</span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" formControlName="titleCaro" class="form-control"
+                                        placeholder="Title" name="TitleCaro" id="titleCaro" autocomplete="off">
+                                </div>
+
+                                <div class="form-group">
+                                    <h6 class="text-center">Message Content</h6>
+                                    <textarea formControlName="messageContentCaro" class="form-control" rows="3"
+                                        name="MessageContentCaro" id="messageContentCaro"></textarea>
+
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" formControlName="actionButtonTitleCaro" class="form-control"
+                                        placeholder="Action Button {{i+1}} Title" name="ActionButton1TitleCaro"
+                                        id="actionButtonTitleCaro" autocomplete="off">
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="text" formControlName="actionButtonURLCaro" class="form-control"
+                                        placeholder="Action Button {{i+1}} URL" name="ActionButton1URLCaro"
+                                        id="actionButtonURLCaro" autocomplete="off">
+                                </div>
+                                <div class="text-center">
+                                    <a class="btn btn-success btn-sm" (click)="addProductButtonClick()">MORE SLIDES
+                                        +</a>
+                                    <a *ngIf="i>0" (click)="removeElement(product)" class="btn btn-danger btn-sm">REMOVE
+                                        THIS -</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="text-center">
+                        <button type="submit" id="smbtbtnCaro" class="btn btn-success" data-toggle="modal"
+                            data-target="#carouselForm">Upload</button>
+                    </div>
+                </form>
+            </div>
+            <br><br>
+        </div>
+        <div class="col-sm-5">
+            <div id="outertemplaterich" *ngIf="options">
+
+                <br><br>
+                <h5 class="text-center">GOOGLE RICH CARD TEMPLATES</h5>
+
+                <div class="card bg-light text-dark">
+                    <div class="card-body">
+
+
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr style="background-color: #888; color:#f8f9fa;">
+                                    <td>GOOGLE TEMP ID</td>
+                                    <td>Title</td>
+                                    <td>Date</td>
+                                </tr>
+
+                            </tbody>
+                            <tbody id="jar">
+                            </tbody>
+
+
+
+                        </table>
+
+                        <nav>
+                            <ul class="pagination pagination1 justify-content-center pagination-sm">
+                                <li class="page-item" id="previous-page"><a class="page-link"
+                                        href="javascript:void(0)">Prev</a></li>
+                                <li class="page-item" id="next-page"><a class="page-link"
+                                        href="javascript:void(0)">Next</a></li>
+                            </ul>
+                        </nav>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="outertemplatecar" *ngIf="!options">
+
+                <br><br>
+                <h5 class="text-center">GOOGLE CAROUSEL TEMPLATES</h5>
+
+                <div class="card bg-light text-dark">
+                    <div class="card-body">
+
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr style="background-color: #888; color:#f8f9fa;">
+                                    <td>GOOGLE TEMP ID</td>
+                                    <td>Title</td>
+                                    <td>Date</td>
+                                </tr>
+
+                            </tbody>
+                            <tbody id="jar2">
+                            </tbody>
+
+
+
+                        </table>
+
+                        <nav>
+                            <ul class="pagination pagination2 justify-content-center pagination-sm">
+                                <li class="page-item" id="previous-page2"><a class="page-link"
+                                        href="javascript:void(0)">Prev</a></li>
+                                <li class="page-item" id="next-page2"><a class="page-link"
+                                        href="javascript:void(0)">Next</a></li>
+                            </ul>
+                        </nav>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">RICH CARD - SMS Preview</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="filePreviewRichCard" class="devicePreview">
+                    <div class="contents">
+                        <img [src]="filePreviewRichCard" alt="File preview">
+                        <h5>{{ titleRich }}</h5>
+                        <p class="messageContent">{{ messageContentRich }}</p>
+                        <a href="{{actionButton1URLRich}}" class="btn btn-outline-primary btn-block">{{
+                            actionButton1TitleRich }}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="carouselForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">CAROUSEL - SMS Preview</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div *ngIf="filePreviewCarousel" class="devicePreview">
+                    <div class="contents" *ngFor="let abc of loanProductForm.value['vitals']">
+                        <!-- <img [src]="{{abc.file}}" alt="File preview"> -->
+                        <h5>{{ abc.titleCaro }}</h5>
+                        <p class="messageContent">{{ messageContentCaro }}</p>
+                        <a href="{{actionButton1URLCaro}}" class="btn btn-outline-primary btn-block">{{
+                            actionButton1TitleCaro }}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+            </div>
+        </div>
+    </div>
+</div>
